@@ -1,0 +1,9 @@
+/build
+# IDEA
+*.iml
+.externalNativeBuild
+.idea/
+.gradle/
+local.properties
+# OSX
+*.DS_Store
