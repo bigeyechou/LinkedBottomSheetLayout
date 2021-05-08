@@ -25,19 +25,19 @@ import com.dayaner.sheetsdemo.R;
  * -------------------------------------
  */
 public class DetailView extends FrameLayout {
-    private ToolbarView toolbarView;
-    private LinkedScrollView linkedScrollView;
-    private BottomSheetLayout bottomSheetLayout;
+    public ToolbarView toolbarView;
+    public LinkedScrollView linkedScrollView;
+    public BottomSheetLayout bottomSheetLayout;
 
     /**
      * 顶部列表
      */
-    private RecyclerView topRecyclerView;
+    public RecyclerView topRecyclerView;
 
     /**
      * 底部视图
      */
-    private FrameLayout bottomLayout;
+    public FrameLayout bottomLayout;
 
     private View bottomScrollViewProvider;
 
@@ -79,7 +79,7 @@ public class DetailView extends FrameLayout {
         bottomSheetLayout = new BottomSheetLayout(getContext());
         LayoutParams bottomSheetParams = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
         bottomSheetParams.topMargin = toolbarHeight;
-        addView(bottomLayout, bottomSheetParams);
+        addView(bottomSheetLayout, bottomSheetParams);
 
         toolbarView = new ToolbarView(getContext());
         addView(toolbarView, new LayoutParams(LayoutParams.MATCH_PARENT, toolbarHeight));
