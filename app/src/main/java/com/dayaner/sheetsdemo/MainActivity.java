@@ -11,25 +11,16 @@ import com.dayaner.sheetsdemo.view.LinkedScrollView;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TextView tvTitle;
-    private LinkedScrollView scrollView;
-    private BottomSheetLayout bottomSheetLayout;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        tvTitle = findViewById(R.id.tv_title);
-        scrollView = findViewById(R.id.scroll_linked);
-        bottomSheetLayout = findViewById(R.id.bottom_sheet);
-
-        FrameLayout bottomContainer = scrollView.bottomContainer;
-//        bottomContainer.setLayoutParams();
-
-//        scrollView.bottomContainer.setLayoutParams(new LayoutPar);
-
+        initTopLayout();
         initBottomLayout();
+    }
+
+    private void initTopLayout() {
+
     }
 
     private void initBottomLayout() {
