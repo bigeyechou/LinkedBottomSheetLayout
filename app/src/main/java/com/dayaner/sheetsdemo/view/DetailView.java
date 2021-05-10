@@ -50,7 +50,7 @@ public class DetailView extends FrameLayout {
     private int toolbarHeight;
     private int minBottomShowingHeight = toolbarHeight;
 
-    private boolean isBottomViewFloating = false;
+    public boolean isBottomViewFloating = false;
 
     public void setBottomViewFloating(boolean bottomViewFloating) {
         this.isBottomViewFloating = bottomViewFloating;

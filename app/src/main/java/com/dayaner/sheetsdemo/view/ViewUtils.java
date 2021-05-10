@@ -3,11 +3,13 @@ package com.dayaner.sheetsdemo.view;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.recyclerview.widget.RecyclerView;
+
 /**
  * -------------------------------------
- * 作者：dayaner
+ * 作者：likang
  * -------------------------------------
- * 时间：4/9/21 8:05 PM
+ * 时间： 2021/4/8 6:06 PM
  * -------------------------------------
  * 描述：
  * -------------------------------------
@@ -15,6 +17,7 @@ import android.view.ViewGroup;
  * -------------------------------------
  */
 public class ViewUtils {
+
     /**
      * 寻找 ViewGroup 在某个点下的子 View
      *
@@ -24,12 +27,7 @@ public class ViewUtils {
      * @return
      */
     public static View findChildUnder(ViewGroup group, final float rawX, final float rawY) {
-        return findFirst(false, group, new ViewUnderListener() {
-            @Override
-            public boolean viewUnder(View view) {
-                return isUnder(view, rawX, rawY);
-            }
-        });
+        return findFirst(false, group, rawX, rawY);
     }
 
 
@@ -40,18 +38,16 @@ public class ViewUtils {
      * @param group
      * @return
      */
-    public static View findFirst(boolean recursively, ViewGroup group, ViewUnderListener underListener) {
+    public static View findFirst(boolean recursively, ViewGroup group, float rawX, float rawY) {
         int childCount = group.getChildCount();
         for (int i = 0; i < childCount; i++) {
             View v = group.getChildAt(i);
-            if (underListener.viewUnder(v)) {
+            if (isUnder(v, rawX, rawY)) {
                 return v;
             }
             if (recursively) {
                 if (v instanceof ViewGroup) {
-                    return findFirst(recursively, (ViewGroup) v, underListener);
-                } else {
-                    continue;
+                    return findFirst(recursively, (ViewGroup) v, rawX, rawY);
                 }
             }
         }
@@ -67,15 +63,18 @@ public class ViewUtils {
      * @return
      */
     public static boolean isUnder(View view, float rawX, float rawY) {
+        if (view == null) {
+            return false;
+        }
         int[] xy = new int[2];
         view.getLocationOnScreen(xy);
-//        return rawX.toInt() in xy[ 0]..(xy[0] + width) && rawY.toInt() in xy[ 1]..(xy[1] + height)
         return (xy[0] < rawX && rawX <= (xy[0] + view.getWidth())) && (xy[1] < rawY && rawY <= (xy[1] + view.getHeight()));
     }
 
 
     /**
      * 寻找在某个点下，可以处理滚动量的子 View
+     *
      * @param view
      * @param rawX
      * @param rawY
@@ -83,13 +82,13 @@ public class ViewUtils {
      * @return
      */
     public static View findScrollableTarget(View view, float rawX, float rawY, int dScrollY) {
-        if (view == null){
+        if (view == null) {
             return null;
         }
         if (!isUnder(view, rawX, rawY)) {
             return null;
         }
-        if (view.canScrollVertically(dScrollY)) {
+        if (view.canScrollVertically(dScrollY) || (dScrollY > 0 && view instanceof RecyclerView)) {
             return view;
         }
         if (!(view instanceof ViewGroup)) {
@@ -105,10 +104,5 @@ public class ViewUtils {
             }
             return t;
         }
-    }
-
-
-    public interface ViewUnderListener {
-        boolean viewUnder(View view);
     }
 }
