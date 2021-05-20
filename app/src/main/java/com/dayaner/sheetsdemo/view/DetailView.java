@@ -74,6 +74,8 @@ public class DetailView extends FrameLayout {
     private void initView() {
         toolbarHeight = (int) getContext().getResources().getDimension(R.dimen.toolbar_height);
         linkedScrollView = new LinkedScrollView(getContext());
+        FrameLayout.LayoutParams linkParam = new FrameLayout.LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.MATCH_PARENT);
+        linkedScrollView.setPadding(0,toolbarHeight,0,0);
         addView(linkedScrollView);
 
         bottomSheetLayout = new BottomSheetLayout(getContext());
@@ -93,6 +95,7 @@ public class DetailView extends FrameLayout {
             linkedScrollView.setOnScrollChangeListener(new OnScrollChangeListener() {
                 @Override
                 public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+                    updateTitlebar();
                     updateBottomView();
                     updateToolbar();
                 }
@@ -122,6 +125,10 @@ public class DetailView extends FrameLayout {
         linkedScrollView.setTopView(topRecyclerView, topRecyclerView);
         bottomLayout = new FrameLayout(getContext());
         linkedScrollView.setBottomView(bottomLayout, bottomScrollViewProvider);
+    }
+
+    private void updateTitlebar() {
+
     }
 
     @Override

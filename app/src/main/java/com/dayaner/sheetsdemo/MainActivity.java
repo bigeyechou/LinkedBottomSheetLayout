@@ -58,8 +58,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initBottomLayout() {
-//        mDetailView.bottomSheetLayout.setBackgroundColor(Color.WHITE);
         LayoutInflater.from(this).inflate(R.layout.view_bottom_content, mDetailView.bottomLayout,true);
+
         mDetailView.bottomSheetLayout.setProcess(1f,true);
     }
 }
